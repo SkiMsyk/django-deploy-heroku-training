@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import dj_database_url
+import django_heroku
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -115,6 +116,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # for deply at heroku
+django_heroku.settings(locals())
 DATABASES['default'] = dj_database_url.config()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https',)
