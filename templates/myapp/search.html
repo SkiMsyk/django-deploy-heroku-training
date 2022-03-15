@@ -3,8 +3,8 @@
 {% block content %}
 <!-- Jumbotron -->
 <div class="p-5 text-center bg-light">
-  <h1 class="mb-3">This is personal blog</h1>
-  <h4 class="mb-3">Data viesualization and analysis</h4>
+  <h1 class="mb-3">{{ request.site.siteconfig.top_title }}</h1>
+  <h4 class="mb-3">{{ request.site.siteconfig.top_sub_title }}</h4>
 
   <div>
     <a class="btn btn-primary mb-3" href="{% url 'myapp:post_list' %}" role="button">Articles</a>

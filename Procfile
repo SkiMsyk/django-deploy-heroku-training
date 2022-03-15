@@ -1,1 +1,1 @@
-web: gnicorn myproject.wsgi
+web: gnicorn myblog.wsgi
