@@ -1,0 +1,46 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <br>
+        <h2> New post </h2>
+        <br>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Title input -->
+            <div class="form-group mb-4">
+                <label> Title </label>
+                {{ form.title }}
+            </div>
+
+            <!-- Category input -->
+            <div class="form-group mb-4">
+                <label> Category </label>
+                {{ form.category }}
+            </div>
+
+            <!-- Thumbnail input -->
+            <div class="form-group mb-4">
+                <label> Thumbnail </label>
+                {{ form.thumbnail }}
+            </div>
+
+            <!-- Content input -->
+            <div class="form-group mb-4">
+                <label>Content</label>
+                {{ form.content }}
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-dark btn-rounded mb-4">POST</button>
+
+            <a type="button" class="btn btn-light btn-rounded mb-4" href="/">
+                Go Back
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

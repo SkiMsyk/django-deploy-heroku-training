@@ -1,0 +1,49 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<!-- Jumbotron -->
+<div class="p-5 text-center bg-light">
+  <h1 class="mb-3">This is personal blog</h1>
+  <h4 class="mb-3">Data viesualization and analysis</h4>
+
+  <div>
+    <a class="btn btn-primary mb-3" href="{% url 'myapp:post_list' %}" role="button">Articles</a>
+  </div>
+  {% if request.user.is_authenticated %}
+  <div>
+  <a class="btn btn-secondary" href="{% url 'myapp:post_create' %}" role="button">New post</a>
+  </div>
+  {% endif %}
+</div>
+<!-- Jumbotron -->
+
+{% if is_exist %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for post in posts_hit %}
+    <div class="col">
+      <a href="{% url 'myapp:post_detail' post.id %}">
+      <div class="card h-100">
+        {% if post.thumbnail %}
+        <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}"/>
+        {% else %}
+        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="{{ post.title }}"/>
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <div class='text-muted'> 
+            <p> {{ post.category }}</p>
+            {{ post.created_at }}
+            <small> written by {{ post.author }} </small>
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+    <br>
+  {% else %}
+    <h5 class="mb-3">{{ search_word }}に一致する記事は見つかりませんでした。</h5>
+  {% endif %}
+
+{% endblock %}

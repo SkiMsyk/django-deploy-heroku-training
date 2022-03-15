@@ -1,0 +1,67 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-9">
+    <br>  
+    {% if post.thumbnail %}
+      <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}" height="400"/>
+    {% else %}
+      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="{{ post.title }}"/>
+    {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <p class="small"> {{ object.category }}</p>
+        <p class="card-text">{{ object.content | safe | linebreaksbr | urlize }}</p>
+
+        {% if is_liked %}
+        <a class="btn" href="{% url 'myapp:addlike' object.pk %}" style="background-color:#13ae4b; color:white">
+          Liked
+        </a>
+        {% else %}
+        <a class="btn" href="{% url 'myapp:addlike' object.pk %}" style="background-color:#FF6699; color:white">
+          Like
+        </a>
+        {% endif %}
+        </a>
+
+        <a href="javascript:void(0);" onclick="window.history.back();" class="btn btn-outline-info">Back</a>
+
+        {% if user.is_authenticated and object.author == user %}
+        <div>
+          <br>
+          <a href="{% url 'myapp:post_update' object.pk %}" type="button" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark">
+            Edit
+          </a>
+          <a href="{% url 'myapp:post_delete' object.pk %}" type="button" class="btn btn-outline-danger btn-rounded" data-mdb-ripple-color="dark">
+            Delete
+          </a>
+        </div>
+        {% endif %}        
+    </div>
+  </div>
+  <div class="col-md-3">
+        
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ object.category }}</h5>
+            <p> same category post </p>
+            <ul class="list-group">
+            {% for post in posts %}
+            
+            <li class="list-group-item">
+              <a href="{% url 'myapp:post_detail' post.id %}">
+              {{ post.title }}
+              </a>
+            </li>
+
+            {% endfor %}
+            </ul>
+        </div>
+      </div>
+
+  </div>
+</div>
+{% endblock %}

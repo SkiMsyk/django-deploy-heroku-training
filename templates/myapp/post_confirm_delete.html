@@ -1,0 +1,17 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-9">
+    <br>
+    <div class="alert alert-danger" role="alert">
+      <form method="post">
+        {% csrf_token %}
+        <p> Do you really want to delete this post?</p>
+        <h2>Title : {{ object.title}} </h2>
+        <input type="submit" class="btn btn-outline-danger" value="Delete">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

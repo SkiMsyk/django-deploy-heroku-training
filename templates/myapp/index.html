@@ -1,0 +1,45 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<!-- Jumbotron -->
+<div class="p-5 text-center bg-light">
+  <h1 class="mb-3">{{ request.site.siteconfig.top_title }}</h1>
+  <h4 class="mb-3">{{ request.site.siteconfig.top_sub_title }}</h4>
+
+  <div>
+    <a class="btn btn-primary mb-3" href="{% url 'myapp:post_list' %}" role="button">Articles</a>
+  </div>
+  {% if request.user.is_authenticated %}
+  <div>
+  <a class="btn btn-secondary" href="{% url 'myapp:post_create' %}" role="button">New post</a>
+  </div>
+  {% endif %}
+</div>
+<!-- Jumbotron -->
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for post in post_list %}
+  <div class="col">
+    <a href="{% url 'myapp:post_detail' post.id %}">
+    <div class="card h-100">
+      {% if post.thumbnail %}
+      <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}"/ height="200">
+      {% else %}
+      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="{{ post.title }}"/>
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <div class='text-muted'> 
+          <p> {{ post.category }}</p>
+          <p> {{ post.content | safe | truncatechars_html:15 }}</p>
+          {{ post.created_at }}
+          <small> written by {{ post.author }} </small>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<br>
+{% endblock %}
