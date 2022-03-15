@@ -1,1 +1,1 @@
-web: gnicorn myblog.wsgi
+web: gnicorn myblog.wsgi --log-file -
