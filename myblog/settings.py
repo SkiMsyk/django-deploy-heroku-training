@@ -116,7 +116,7 @@ LOGIN_REDIRECT_URL = 'myapp:index'
 
 # S3 setting
 AWS_STORAGE_BUCKET_NAME = 'udemy-django-heroku-course'
-AWS_S3_CUSTOM_DOMAIN = '%s.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.ap-northeast-1.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
